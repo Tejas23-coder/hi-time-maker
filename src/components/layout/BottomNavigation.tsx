@@ -1,13 +1,13 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { LayoutDashboard, FileText, Plus, Activity, User } from 'lucide-react';
+import { LayoutDashboard, FileText, Plus, Map, User } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const navigationItems = [
-  { title: 'Dashboard', url: '/', icon: LayoutDashboard },
-  { title: 'Reports', url: '/reports', icon: FileText },
+  { title: 'Home', url: '/', icon: LayoutDashboard },
+  { title: 'Map', url: '/map', icon: Map },
   { title: 'Report', url: '/create-report', icon: Plus, isSpecial: true },
-  { title: 'Activity', url: '/activity', icon: Activity },
+  { title: 'Reports', url: '/reports', icon: FileText },
   { title: 'Profile', url: '/profile', icon: User },
 ];
 
