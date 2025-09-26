@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useMemo } from 'react';
 import { MapContainer, TileLayer, Marker, Popup, CircleMarker } from 'react-leaflet';
 import { Icon, divIcon } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
@@ -15,6 +15,7 @@ import {
   CloudRain,
   Mountain
 } from 'lucide-react';
+import { MapErrorBoundary } from '@/components/MapErrorBoundary';
 
 // Fix for default markers in react-leaflet
 delete (Icon.Default.prototype as any)._getIconUrl;
@@ -103,17 +104,28 @@ const getMarkerIcon = (type: string, severity: string) => {
 export default function MapView() {
   const [selectedLayers, setSelectedLayers] = useState(['reports', 'hotspots']);
   const [searchQuery, setSearchQuery] = useState('');
+  const mapRef = useRef(null);
+  
+  // Memoize map configuration to prevent re-initialization
+  const mapConfig = useMemo(() => ({
+    center: [20.5937, 78.9629] as [number, number],
+    zoom: 5,
+    scrollWheelZoom: true,
+  }), []);
 
   return (
     <div className="h-screen flex">
       {/* Map Container */}
       <div className="flex-1 relative">
-        <MapContainer
-          center={[20.5937, 78.9629]} // Center of India
-          zoom={5}
-          className="h-full w-full"
-          scrollWheelZoom={true}
-        >
+        <MapErrorBoundary>
+          <MapContainer
+            key="main-map" // Prevent re-initialization
+            ref={mapRef}
+            center={mapConfig.center}
+            zoom={mapConfig.zoom}
+            className="h-full w-full"
+            scrollWheelZoom={mapConfig.scrollWheelZoom}
+          >
           <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -173,7 +185,8 @@ export default function MapView() {
               </Popup>
             </CircleMarker>
           ))}
-        </MapContainer>
+          </MapContainer>
+        </MapErrorBoundary>
 
         {/* Map Controls */}
         <div className="absolute top-4 left-4 z-[1000] space-y-2">
