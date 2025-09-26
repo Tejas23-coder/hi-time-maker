@@ -4,6 +4,8 @@ import { Button } from '@/components/ui/button';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { SidebarTrigger } from '@/components/ui/sidebar';
 import { useUserStore } from '@/store/useUserStore';
+import { LanguageSwitcher } from '@/components/LanguageSwitcher';
+import { OfflineIndicator } from '@/components/OfflineIndicator';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -30,11 +32,14 @@ export const Header = () => {
             <h1 className="text-lg font-semibold text-foreground">MoES</h1>
             <p className="text-xs text-muted-foreground hidden sm:block">Hazard Reporter</p>
           </div>
+          <OfflineIndicator />
         </div>
       </div>
 
       {isAuthenticated && (
         <div className="flex items-center gap-3">
+          <LanguageSwitcher />
+          
           {/* Notifications */}
           <Button variant="ghost" size="icon" className="relative">
             <Bell className="h-5 w-5" />
