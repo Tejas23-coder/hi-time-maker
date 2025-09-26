@@ -4,7 +4,7 @@ import { LayoutDashboard, FileText, Plus, Activity, User } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const navigationItems = [
-  { title: 'Dashboard', url: '/dashboard', icon: LayoutDashboard },
+  { title: 'Dashboard', url: '/', icon: LayoutDashboard },
   { title: 'Reports', url: '/reports', icon: FileText },
   { title: 'Report', url: '/create-report', icon: Plus, isSpecial: true },
   { title: 'Activity', url: '/activity', icon: Activity },

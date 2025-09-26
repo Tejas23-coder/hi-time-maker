@@ -39,11 +39,9 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children }) => {
           </main>
 
           {/* Mobile Bottom Navigation */}
-          {isAuthenticated && (
-            <div className="md:hidden">
-              <BottomNavigation />
-            </div>
-          )}
+          <div className="md:hidden">
+            <BottomNavigation />
+          </div>
         </div>
       </div>
     </SidebarProvider>

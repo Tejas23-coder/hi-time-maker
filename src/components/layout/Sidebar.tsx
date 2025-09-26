@@ -38,9 +38,7 @@ export const Sidebar = () => {
   const location = useLocation();
   const { isAuthenticated } = useUserStore();
 
-  if (!isAuthenticated) {
-    return null;
-  }
+  // Always show sidebar for demo purposes
 
   const isActive = (path: string) => location.pathname === path;
 
